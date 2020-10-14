@@ -1,24 +1,38 @@
 package web.model;
 
-import java.util.Date;
+import javax.persistence.*;
+import java.util.Objects;
 
+@Entity
+@Table(name = "users")
 public class User {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    private Long id;
+
+    @Column
     private String name;
+
+    @Column
     private String lastName;
+
+    @Column(unique = true, nullable = false)
     private String email;
-    private Date dateBirthday;
+
+//    @Column
+//    private Date dateBirthday;
 
     public User() {
     }
 
-    public User(long id, String name, String lastName, String email, Date dateBirthday) {
-        this.id = id;
+    public User(String name, String lastName, String email/*, Date dateBirthday*/) {
+
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        this.dateBirthday = dateBirthday;
+        //this.dateBirthday = dateBirthday;
     }
 
     public long getId() {
@@ -53,13 +67,13 @@ public class User {
         this.email = email;
     }
 
-    public Date getDateBirthday() {
-        return dateBirthday;
-    }
-
-    public void setDateBirthday(Date dateBirthday) {
-        this.dateBirthday = dateBirthday;
-    }
+//    public Date getDateBirthday() {
+//        return dateBirthday;
+//    }
+//
+//    public void setDateBirthday(Date dateBirthday) {
+//        this.dateBirthday = dateBirthday;
+//    }
 
     @Override
     public String toString() {
@@ -68,7 +82,23 @@ public class User {
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", dateBirthday=" + dateBirthday +
+                //", dateBirthday=" + dateBirthday +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id.equals(user.id) &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(lastName, user.lastName) &&
+                email.equals(user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, lastName, email);
     }
 }
