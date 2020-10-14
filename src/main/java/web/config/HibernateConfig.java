@@ -48,7 +48,6 @@ public class HibernateConfig {
         dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
         dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
         dataSource.setPassword(env.getRequiredProperty(PROP_DATABASE_PASSWORD));
-
         return dataSource;
     }
 
@@ -58,20 +57,20 @@ public class HibernateConfig {
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean =
                 new LocalContainerEntityManagerFactoryBean();
-        factoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
+        //factoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPersistenceUnitName("myJpaPersistenceUnit");
+        //factoryBean.setPersistenceUnitName("myJpaPersistenceUnit");
         factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         factoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
         factoryBean.setJpaProperties(getHibernateProperties());
         return factoryBean;
     }
 
-    @Bean
-    public JpaVendorAdapter getJpaVendorAdapter() {
-        JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        return adapter;
-    }
+//    @Bean
+//    public JpaVendorAdapter getJpaVendorAdapter() {
+//        JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+//        return adapter;
+//    }
 
     @Bean(name = "transactionManager")
     public PlatformTransactionManager getTransactionManager() {
@@ -87,7 +86,7 @@ public class HibernateConfig {
         Properties properties = new Properties();
         properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
         properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
-        properties.put(PROP_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROP_HIBERNATE_FORMAT_SQL));
+        //properties.put(PROP_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROP_HIBERNATE_FORMAT_SQL));
         properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
 
         return properties;

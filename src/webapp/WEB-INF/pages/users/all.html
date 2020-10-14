@@ -7,6 +7,7 @@
 </head>
 <body>
 <h1>User Information</h1>
+<a href="/users/save" class="btn btn-danger">добавить нового пользователя</a>
 <div>
     <table>
         <tr>
@@ -21,6 +22,8 @@
                 <td><h3 th:text="${user.getName()}"></h3></td>
                 <td><h3 th:text="${user.getLastName()}"></h3></td>
                 <td><h3 th:text="${user.getEmail()}"></h3></td>
+                <td><a th:href="${'/users/update/' + user.id}" class="btn btn-default">изменить</a></td>
+                <td><a th:href="${'/users/delete/' + user.id}" class="btn btn-danger">удалить</a></td>
             </tr>
         </th:block>
     </table>
