@@ -17,7 +17,7 @@ import web.service.UserService;
 import java.util.List;
 
 @Controller
-@RequestMapping(value = "/")
+//@RequestMapping(value = "/")
 public class UserController {
 
     private UserService userService;
@@ -38,7 +38,7 @@ public class UserController {
 //
 //    }
 
-    @GetMapping(value = "/users")
+    @GetMapping(value = {"/","/users"})
     public String allUsers(ModelMap model) {
         List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
