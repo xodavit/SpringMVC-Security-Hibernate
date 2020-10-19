@@ -6,9 +6,9 @@ import web.model.User;
 import java.util.List;
 
 public interface UserRepository {
-    User addUser(User user);
-    User deleteUser(User user);
-    User editUser(User user);
-    User getById(long id);
+    void addUser(User user);
+    void deleteUser(Long id);
+    void editUser(User user);
+    User getById(Long id);
     List<User> getAllUsers();
 }

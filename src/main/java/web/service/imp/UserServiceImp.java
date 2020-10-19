@@ -10,7 +10,9 @@ import web.service.UserService;
 import java.util.List;
 
 @Service("userServiceImp")
+@Transactional
 public class UserServiceImp implements UserService {
+
     private UserRepository userRepository;
 
     @Autowired
@@ -18,27 +20,26 @@ public class UserServiceImp implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Transactional
     @Override
-    public User addUser(User user) {
-        return userRepository.addUser(user);
+    public void addUser(User user) {
+        userRepository.addUser(user);
     }
-    @Transactional
+
     @Override
-    public User deleteUser(User user) {
-        return userRepository.deleteUser(user);
+    public void deleteUser(Long id) {
+        userRepository.deleteUser(id);
     }
-    @Transactional
+
     @Override
-    public User editUser(User user) {
-        return userRepository.editUser(user);
+    public void editUser(User user) {
+        userRepository.editUser(user);
     }
-    @Transactional
+
     @Override
-    public User getById(long id) {
+    public User getById(Long id) {
         return userRepository.getById(id);
     }
-    @Transactional
+
     @Override
     public List<User> getAllUsers() {
         return userRepository.getAllUsers();

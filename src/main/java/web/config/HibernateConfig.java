@@ -7,6 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -14,13 +15,17 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("classpath:app.properties")
 @EnableTransactionManagement
-@ComponentScan(value = "web")
+
+@PropertySource("classpath:app.properties")
+
+@EnableJpaRepositories("web")
+//@ComponentScan(value = "web")
 
 public class HibernateConfig {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
@@ -43,7 +48,6 @@ public class HibernateConfig {
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-
         dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
         dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
         dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
@@ -53,31 +57,32 @@ public class HibernateConfig {
 
     /************* Start Spring JPA config details **************/
 
+    //@Bean
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean =
                 new LocalContainerEntityManagerFactoryBean();
-        //factoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
+        factoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
         factoryBean.setDataSource(getDataSource());
-        //factoryBean.setPersistenceUnitName("myJpaPersistenceUnit");
-        factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
+        factoryBean.setPersistenceUnitName("myJpaPersistenceUnit");
+        //factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         factoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
         factoryBean.setJpaProperties(getHibernateProperties());
         return factoryBean;
     }
 
-//    @Bean
-//    public JpaVendorAdapter getJpaVendorAdapter() {
-//        JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-//        return adapter;
-//    }
+    @Bean
+    public JpaVendorAdapter getJpaVendorAdapter() {
+        return new HibernateJpaVendorAdapter();
+    }
 
+    //    @Bean
     @Bean(name = "transactionManager")
     public PlatformTransactionManager getTransactionManager() {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(getEntityManagerFactoryBean().getObject());
-
-        return transactionManager;
+//        JpaTransactionManager transactionManager = new JpaTransactionManager();
+//        transactionManager.setEntityManagerFactory(getEntityManagerFactoryBean().getObject());
+//        return transactionManager;
+        return new JpaTransactionManager(getEntityManagerFactoryBean().getObject());
     }
 
     /************* End Spring JPA config details **************/
@@ -86,7 +91,7 @@ public class HibernateConfig {
         Properties properties = new Properties();
         properties.put(PROP_HIBERNATE_DIALECT, env.getRequiredProperty(PROP_HIBERNATE_DIALECT));
         properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
-        //properties.put(PROP_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROP_HIBERNATE_FORMAT_SQL));
+        properties.put(PROP_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROP_HIBERNATE_FORMAT_SQL));
         properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
 
         return properties;

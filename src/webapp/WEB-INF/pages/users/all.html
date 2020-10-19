@@ -12,9 +12,9 @@
     <table>
         <tr>
             <td><h2>id</h2></td>
-            <td><h2>имя</h2></td>
-            <td><h2>фамилия</h2></td>
-            <td><h2>мыло</h2></td>
+            <td><h2>name</h2></td>
+            <td><h2>lastname</h2></td>
+            <td><h2>email</h2></td>
         </tr>
         <th:block th:each="user : ${allUsers}">
             <tr>
@@ -22,8 +22,8 @@
                 <td><h3 th:text="${user.getName()}"></h3></td>
                 <td><h3 th:text="${user.getLastName()}"></h3></td>
                 <td><h3 th:text="${user.getEmail()}"></h3></td>
-                <td><a th:href="${'/users/update/' + user.id}" class="btn btn-default">изменить</a></td>
-                <td><a th:href="${'/users/delete/' + user.id}" class="btn btn-danger">удалить</a></td>
+                <td><a th:href="${'/users/update/' + user.id}" class="btn btn-default">change</a></td>
+                <td><a th:href="${'/users/delete/' + user.id}" class="btn btn-danger">delete</a></td>
             </tr>
         </th:block>
     </table>
