@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
-
 <head>
     <meta charset="UTF-8">
-    <title>Все пользователи</title>
+    <title>Найденный пользователь</title>
 </head>
 <body>
-<h2>Все пользователи</h2>
 <div>
     <table>
         <tr>
@@ -15,31 +12,31 @@
             <th>Имя</th>
             <th>Фамилия</th>
             <th>Почтовый ящик</th>
-        </tr>
 
-        <tr th:each="user : ${users}">
+        </tr>
+        <tr>
             <td th:text="${user.getId()}">Id</td>
             <td th:text="${user.getName()}">Имя</td>
             <td th:text="${user.getLastName()}">Фамилия</td>
             <td th:text="${user.getEmail()}">Почтовый ящик</td>
-
             <td>
-                <form th:action="@{users/edit/{id}(id=${user.id})}" th:object="${user}">
+                <form th:action="@{/edit/{id}(id=${user.id})}" th:object="${user}">
                     <button type="submit">Изменить</button>
                 </form>
             </td>
             <td>
-                <form th:action="@{users/delete(id=${user.id})}" th:object="${user}">
+                <form th:action="@{/delete(id=${user.id})}" th:object="${user}">
                     <input type="hidden" name="id" th:value="${user.id}">
                     <button type="submit">Удалить</button>
                 </form>
             </td>
+
         </tr>
     </table>
-    <form th:action="@{users/add}">
-        <button type="submit">Добавить нового пользователя</button>
+    <br/>
+    <form th:action="@{/}">
+        <button type="submit">Назад к списку пользователей</button>
     </form>
 </div>
-
 </body>
 </html>

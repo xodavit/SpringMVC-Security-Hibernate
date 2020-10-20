@@ -2,12 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Добавить пользователя</title>
+    <title>Изменить пользователя</title>
 </head>
 <body>
-<h2>Добавить пользователя</h2>
+<h2>Изменить пользователя</h2>
 <div>
-    <form th:action="@{/users/add}" th:object="${user}" method="post">
+
+    <form th:action="@{/users/edit}" th:object="${user}" method="post">
+        <input type="hidden" name="id" th:value="${user.getId()}">
         <fieldset>
             <legend>Данные пользователя</legend>
             <p>
@@ -17,18 +19,20 @@
             <p>
                 <label th:for="lastName">Фамилия</label>
                 <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}"><br/>
-
             </p>
             <p>
                 <label th:for="email">Почтовый ящик</label>
                 <input type="text" name="email" th:id="email" th:value="${user.getEmail()}"><br/>
             </p>
+
         </fieldset>
-        <button type="submit">Сохранить пользователя</button>
+        <button type="submit">Изменить данные</button>
     </form>
+
+
     <br/>
     <form th:action="@{/}">
-        <button type="submit" class="btn btn-outline-danger">Назад к списку пользователей</button>
+        <button type="submit">Назад к списку пользователей</button>
     </form>
 </div>
 </body>

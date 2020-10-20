@@ -1,9 +1,7 @@
 package web.config;
 
-import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -45,15 +43,6 @@ public class HibernateConfig {
         this.env = env;
     }
 
-    @Bean
-    public DataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
-        dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
-        dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
-        dataSource.setPassword(env.getRequiredProperty(PROP_DATABASE_PASSWORD));
-        return dataSource;
-    }
 
     /************* Start Spring JPA config details **************/
 
@@ -76,16 +65,22 @@ public class HibernateConfig {
         return new HibernateJpaVendorAdapter();
     }
 
-    //    @Bean
+
     @Bean(name = "transactionManager")
     public PlatformTransactionManager getTransactionManager() {
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(getEntityManagerFactoryBean().getObject());
-//        return transactionManager;
         return new JpaTransactionManager(getEntityManagerFactoryBean().getObject());
     }
 
     /************* End Spring JPA config details **************/
+    @Bean
+    public DataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(env.getRequiredProperty(PROP_DATABASE_DRIVER));
+        dataSource.setUrl(env.getRequiredProperty(PROP_DATABASE_URL));
+        dataSource.setUsername(env.getRequiredProperty(PROP_DATABASE_USERNAME));
+        dataSource.setPassword(env.getRequiredProperty(PROP_DATABASE_PASSWORD));
+        return dataSource;
+    }
 
     private Properties getHibernateProperties() {
         Properties properties = new Properties();

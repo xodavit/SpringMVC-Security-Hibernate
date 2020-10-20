@@ -6,15 +6,14 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>ru.xodavit</groupId>
-  <artifactId>spring-mvc-hibernate</artifactId>
+  <artifactId>spring-mvc-hibernate2</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>war</packaging>
 
-  <name>spring-mvc-hibernate Maven Webapp</name>
+  <name>spring-mvc-hibernate2 Maven Webapp</name>
   <url>http://www.xodavit.com</url>
 
   <properties>
-
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.source>1.15</maven.compiler.source>
     <maven.compiler.target>1.15</maven.compiler.target>
@@ -25,94 +24,54 @@
     <mysql.connector.java.version>8.0.21</mysql.connector.java.version>
     <javax.servlet.version>4.0.1</javax.servlet.version>
     <thymeleaf.version>3.0.11.RELEASE</thymeleaf.version>
-
   </properties>
 
   <dependencies>
+    <!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-api &ndash;&gt;-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.slf4j</groupId>-->
+    <!--      <artifactId>slf4j-api</artifactId>-->
+    <!--      <version>1.7.30</version>-->
+    <!--    </dependency>-->
+    <!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 &ndash;&gt;-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.slf4j</groupId>-->
+    <!--      <artifactId>slf4j-log4j12</artifactId>-->
+    <!--      <version>1.7.30</version>-->
+    <!--      <scope>test</scope>-->
+    <!--    </dependency>-->
+    <!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core &ndash;&gt;-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.apache.logging.log4j</groupId>-->
+    <!--      <artifactId>log4j-core</artifactId>-->
+    <!--      <version>2.13.3</version>-->
+    <!--    </dependency>-->
+
+    <!--    &lt;!&ndash; https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api &ndash;&gt;-->
+    <!--    <dependency>-->
+    <!--      <groupId>org.apache.logging.log4j</groupId>-->
+    <!--      <artifactId>log4j-api</artifactId>-->
+    <!--      <version>2.13.3</version>-->
+    <!--    </dependency>-->
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>${junit.version}</version>
       <scope>test</scope>
     </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-api</artifactId>
-      <version>1.7.30</version>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
-    <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.30</version>
-      <scope>test</scope>
-    </dependency>
-    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-core</artifactId>
-      <version>2.13.3</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-    <dependency>
-      <groupId>org.apache.logging.log4j</groupId>
-      <artifactId>log4j-api</artifactId>
-      <version>2.13.3</version>
-    </dependency>
-
-
-
-
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
       <version>${spring.version}</version>
       <scope>test</scope>
     </dependency>
+
+
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-webmvc</artifactId>
       <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-orm</artifactId>
-      <version>${spring.version}</version>
-    </dependency>
-
-
-    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-    <dependency>
-      <groupId>org.springframework.data</groupId>
-      <artifactId>spring-data-jpa</artifactId>
-      <version>2.3.4.RELEASE</version>
-    </dependency>
-
-
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>${hibernate.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.hibernate</groupId>
-      <artifactId>hibernate-entitymanager</artifactId>
-      <version>${hibernate.version}</version>
-    </dependency>
-
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>${mysql.connector.java.version}</version>
-<!--      <scope>provided</scope>-->
     </dependency>
 
     <dependency>
@@ -127,39 +86,79 @@
       <artifactId>thymeleaf-spring5</artifactId>
       <version>${thymeleaf.version}</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--    <dependency>-->
+    <!--      <groupId>org.springframework</groupId>-->
+    <!--      <artifactId>spring-context</artifactId>-->
+    <!--      <version>${spring.version}</version>-->
+    <!--    </dependency>-->
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-core</artifactId>
+      <version>${hibernate.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>${mysql.connector.java.version}</version>
+      <!--      <scope>provided</scope>-->
+    </dependency>
+
+    <!--    //    <dependency>-->
+    <!--    <groupId>org.hibernate</groupId>-->
+    <!--    <artifactId>hibernate-entitymanager</artifactId>-->
+    <!--    <version>${hibernate.version}</version>-->
+    <!--  </dependency>-->
+
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>tomcat-dbcp</artifactId>
+      <version>9.0.10</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+    <dependency>
+      <groupId>org.springframework.data</groupId>
+      <artifactId>spring-data-jpa</artifactId>
+      <version>2.3.4.RELEASE</version>
+    </dependency>
+
+
   </dependencies>
 
-
   <build>
-    <finalName>spring-mvc-hibernate</finalName>
-
+    <finalName>spring-mvc-hibernate2</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>
         <plugin>
           <artifactId>maven-clean-plugin</artifactId>
           <version>3.1.0</version>
         </plugin>
-
         <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
         </plugin>
-
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
           <version>3.8.0</version>
-<!--          <configuration>-->
-<!--            <source>1.15</source>-->
-<!--            <target>1.15</target>-->
-<!--          </configuration>-->
+          <!--          <configuration>-->
+          <!--            <source>1.15</source>-->
+          <!--            <target>1.15</target>-->
+          <!--          </configuration>-->
         </plugin>
-
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.22.1</version>
         </plugin>
-
         <plugin>
           <artifactId>maven-war-plugin</artifactId>
           <version>3.2.2</version>
@@ -169,19 +168,15 @@
             <failOnMissingWebXml>false</failOnMissingWebXml>
           </configuration>
         </plugin>
-
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
           <version>2.5.2</version>
         </plugin>
-
         <plugin>
           <artifactId>maven-deploy-plugin</artifactId>
           <version>2.8.2</version>
         </plugin>
       </plugins>
     </pluginManagement>
-
   </build>
-
 </project>

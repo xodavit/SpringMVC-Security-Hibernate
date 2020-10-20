@@ -3,13 +3,13 @@ package web.service.imp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import web.repository.UserRepository;
 import web.model.User;
+import web.repository.UserRepository;
 import web.service.UserService;
 
 import java.util.List;
 
-@Service("userServiceImp")
+@Service
 @Transactional
 public class UserServiceImp implements UserService {
 
@@ -36,8 +36,8 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public User getById(Long id) {
-        return userRepository.getById(id);
+    public User getUserById(Long id) {
+        return userRepository.getUserById(id);
     }
 
     @Override

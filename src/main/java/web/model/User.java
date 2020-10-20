@@ -1,7 +1,6 @@
 package web.model;
 
 import javax.persistence.*;
-import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -12,34 +11,37 @@ public class User {
     @Column(nullable = false)
     private Long id;
 
-    @Column
+    @Column(name = "name")
     private String name;
 
-    @Column
+    @Column(name = "lastName")
     private String lastName;
 
-    @Column(unique = true, nullable = false)
+    @Column(name = "email", unique = true)
     private String email;
-
-//    @Column
-//    private Date dateBirthday;
 
     public User() {
     }
 
-    public User(String name, String lastName, String email/*, Date dateBirthday*/) {
-
+    public User(String name, String lastName, String email) {
         this.name = name;
         this.lastName = lastName;
         this.email = email;
-        //this.dateBirthday = dateBirthday;
     }
 
-    public long getId() {
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -59,22 +61,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-//    public Date getDateBirthday() {
-//        return dateBirthday;
-//    }
-//
-//    public void setDateBirthday(Date dateBirthday) {
-//        this.dateBirthday = dateBirthday;
-//    }
-
     @Override
     public String toString() {
         return "User{" +
@@ -82,23 +68,6 @@ public class User {
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                //", dateBirthday=" + dateBirthday +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return id.equals(user.id) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(lastName, user.lastName) &&
-                email.equals(user.email);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, lastName, email);
     }
 }
