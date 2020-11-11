@@ -6,7 +6,6 @@ import web.repository.RoleRepo;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.util.List;
 
 @Repository
@@ -33,7 +32,7 @@ public class RoleRepoImpl implements RoleRepo {
     }
 
     @Override
-    public Role getRoleById(long id) {
+    public Role getRoleById(Long id) {
         return getEntityManager().find(Role.class, id);
     }
 

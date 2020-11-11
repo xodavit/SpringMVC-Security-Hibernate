@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Найденный пользователь</title>
+    <title>Страница пользователя</title>
 </head>
 <body>
 <div>
@@ -12,10 +12,6 @@
     <form th:action="@{/logout}">
         <button type="submit">Выйти</button>
     </form>
-
-<!--    <div th:authorize="isAuthenticated()">
-        <p><a class="btn btn-lg btn-danger" th:href="@{/logout}" role="button">Выйти</a></p>
-    </div>-->
 </div>
 <div>
     <table>
@@ -27,7 +23,6 @@
             <th>Почтовый ящик</th>
             <th>Имя</th>
             <th>Фамилия</th>
-
         </tr>
         </thead>
         <tbody>
@@ -38,11 +33,9 @@
             <td th:text="${user.getEmail()}">Почтовый ящик</td>
             <td th:text="${user.getFirstName()}">Имя</td>
             <td th:text="${user.getLastName()}">Фамилия</td>
-
         </tr>
         </tbody>
     </table>
-
 </div>
 </body>
 </html>

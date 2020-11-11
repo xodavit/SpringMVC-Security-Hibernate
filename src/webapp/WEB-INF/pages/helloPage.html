@@ -7,17 +7,23 @@
 </head>
 <body>
 <div>
-    <th:block th:each="msg : ${messages}">
-        <h1 th:text="${msg}"></h1>
-    </th:block>
-</div>
-<div>
     <form th:action="@{/login}">
         <button type="submit">Войти</button>
     </form>
     <form th:action="@{/admin/all}">
         <button type="submit">Админка</button>
     </form>
+    <form th:action="@{/user}">
+        <button type="submit">ЛК</button>
+    </form>
+    <form th:action="@{/user/lk}">
+        <button type="submit">ЛК2</button>
+    </form>
+</div>
+<div>
+    <th:block th:each="msg : ${messages}">
+        <h1 th:text="${msg}"></h1>
+    </th:block>
 </div>
 </body>
 </html>

@@ -33,7 +33,6 @@ public class User implements Serializable, UserDetails {
     @Column(name = "email")
     private String email;
 
-    @Column(name = "roles")
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinTable(name = "t_users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
@@ -67,6 +66,7 @@ public class User implements Serializable, UserDetails {
     public void setPassword(String password) {
         this.password = password;
     }
+
     @Override
     public String getPassword() {
         return password;
@@ -76,6 +76,7 @@ public class User implements Serializable, UserDetails {
     public String getUsername() {
         return username;
     }
+
     public String getFirstName() {
         return firstName;
     }

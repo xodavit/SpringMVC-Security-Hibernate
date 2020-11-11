@@ -6,9 +6,11 @@
 </head>
 <body>
 <h2>Добавить пользователя</h2>
-<!--<div th:authorize="isAuthenticated()">
-    <p><a class="btn btn-lg btn-danger" th:href="@{/logout}" role="button">Выйти</a></p>
-</div>-->
+<div>
+    <form th:action="@{/}">
+        <button type="submit" class="btn btn-outline-danger">На главную</button>
+    </form>
+</div>
 <div>
     <form th:action="@{add}"
           th:object="${user}"
@@ -16,44 +18,47 @@
         <fieldset>
             <legend>Данные пользователя</legend>
             <p>
-                <label th:for="username">Логин</label>
-                <input type="text" name="username" th:id="username"><br/>
-<!--                <br><br><label for="username" >Username</label>
-    <input type="text" th:field="*{username}" id="username" placeholder="Username">-->
-
-                <label th:for="password">Пароль</label>
-                <input type="text"
-                       name="password"
-                       th:id="password"><br/>
-
-                <label th:for="email">Почтовый ящик</label>
-                <input type="text"
-                       name="email"
-                       th:id="email"><br/>
-
-                <label th:for="firsName">Имя</label>
-                <input type="text"
-                       name="firstName"
-                       th:id="firstName">
-
-                <label th:for="lastName">Фамилия</label>
-                <input type="text"
-                       name="lastName"
-                       th:id="lastName"><br/>
-
-                <input type="checkbox"
-                       name="roleAdmin"
-                       th:value="ROLE_ADMIN"
-                       th:text="Администратор">
-
+                <label th:for="username">Логин
+                    <input type="text"
+                           name="username"
+                           th:id="username">
+                </label>
+                <br/>
+                <label th:for="password">Пароль
+                    <input type="text"
+                           name="password"
+                           th:id="password">
+                </label>
+                <br/>
+                <label th:for="email">Почтовый ящик
+                    <input type="text"
+                           name="email"
+                           th:id="email">
+                </label>
+                <br/>
+                <label th:for="firsName">Имя
+                    <input type="text"
+                           name="firstName"
+                           th:id="firstName">
+                </label>
+                <br/>
+                <label th:for="lastName">Фамилия
+                    <input type="text"
+                           name="lastName"
+                           th:id="lastName">
+                </label>
+                <br/>
+                <label>
+                    <input type="checkbox"
+                           name="roleAdmin"
+                           th:value="ROLE_ADMIN"
+                           th:text="Администратор">
+                </label>
             </p>
         </fieldset>
         <button type="submit">Сохранить пользователя</button>
     </form>
     <br/>
-    <form th:action="@{/}">
-        <button type="submit" class="btn btn-outline-danger">На главную</button>
-    </form>
     <form th:action="@{/admin/all}">
         <button type="submit" class="btn btn-outline-danger">Назад к списку пользователей</button>
     </form>

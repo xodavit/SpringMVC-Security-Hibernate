@@ -1,12 +1,15 @@
 package web.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import web.model.User;
 import web.service.UserService;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/user")
@@ -17,9 +20,18 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
     @GetMapping(value = "/")
-    public String getUserPage() {
-        return "redirect:/user/{id}";
+    public String getUserPage(ModelMap modelMap) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        modelMap.addAttribute("user", user);
+        return "userPage";
+    }
+
+    @GetMapping(value = "/lk")
+    public String getUserPage2(ModelMap modelMap, Principal principal) {
+        modelMap.addAttribute("user", userService.loadUserByUsername(principal.getName()));
+        return "userPage";
     }
 
     @GetMapping("/{id}")
@@ -27,19 +39,4 @@ public class UserController {
         modelMap.addAttribute("user", userService.getUserById(id));
         return "userPage";
     }
-
-    //  @GetMapping(value = "hello")
-    //    public String printUserInfo(Model model, Principal principal) {
-    //
-    //        model.addAttribute("user", userService.findByName(principal.getName()));
-    //        return "hello";
-    //    }
-
-
-    //@GetMapping(value = "/user")
-    //    public String getUserinfo(ModelMap model) {
-    //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    //        model.addAttribute("user", user);
-    //        return "userinfo";
-    //    }
 }
