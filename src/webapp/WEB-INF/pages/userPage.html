@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Найденный пользователь</title>
+</head>
+<body>
+<div>
+    <form th:action="@{/}">
+        <button type="submit">Главная</button>
+    </form>
+    <form th:action="@{/logout}">
+        <button type="submit">Выйти</button>
+    </form>
+
+<!--    <div th:authorize="isAuthenticated()">
+        <p><a class="btn btn-lg btn-danger" th:href="@{/logout}" role="button">Выйти</a></p>
+    </div>-->
+</div>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Login</th>
+            <th>Password</th>
+            <th>Почтовый ящик</th>
+            <th>Имя</th>
+            <th>Фамилия</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${user}">
+            <td th:text="${user.getId()}">Id</td>
+            <td th:text="${user.getUsername()}">Login</td>
+            <td th:text="${user.getPassword()}">Password</td>
+            <td th:text="${user.getEmail()}">Почтовый ящик</td>
+            <td th:text="${user.getFirstName()}">Имя</td>
+            <td th:text="${user.getLastName()}">Фамилия</td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+</html>

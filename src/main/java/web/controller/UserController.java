@@ -9,66 +9,29 @@ import web.model.User;
 import web.service.UserService;
 
 @Controller
+@RequestMapping("/user")
 public class UserController {
-    private UserService userService;
+    private final UserService userService;
 
     @Autowired
-    public void setUserService(UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
-
-    @GetMapping(value = "/test")
-    public String test() {
-        return "test";
-    }
-
     @GetMapping(value = "/")
-    public String welcome() {
-        return "redirect:/users";
+    public String getUserPage() {
+        return "redirect:/user/{id}";
     }
 
-    @GetMapping(value = "users")
-    public String allUsers(ModelMap model) {
-        model.addAttribute("users", userService.getAllUsers());
-        return "users";
-    }
-
-    @GetMapping(value = "users/add")
-    public String addUser(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "addUser";
-    }
-
-    @PostMapping(value = "users/add")
-    public String addUser(@ModelAttribute("user") User user) {
-        userService.addUser(user);
-        return "redirect:/";
-    }
-
-    @GetMapping(value = "users/edit/{id}")
-    public String editUser(ModelMap model, @PathVariable("id") Long id) {
-        User user = userService.getUserById(id);
-        model.addAttribute("user", user);
-        return "editUser";
-    }
-
-    @PostMapping(value = "users/edit")
-    public String edit(@ModelAttribute("user") User user) {
-        userService.editUser(user);
-        return "redirect:/";
-    }
-
-    @GetMapping("users/delete")
-    public String deleteUserById(@RequestParam("id") Long id) {
-        userService.deleteUser(id);
-        return "redirect:/";
-    }
-
-    @GetMapping("users/{id}")
+    @GetMapping("/{id}")
     public String show(@PathVariable("id") Long id, ModelMap modelMap) {
         modelMap.addAttribute("user", userService.getUserById(id));
-        return "show";
+        return "userPage";
     }
 
+    //  @GetMapping(value = "hello")
+    //    public String printUserInfo(Model model, Principal principal) {
+    //
+    //        model.addAttribute("user", userService.findByName(principal.getName()));
+    //        return "hello";
+    //    }
 }

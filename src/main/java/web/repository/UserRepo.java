@@ -4,7 +4,7 @@ import web.model.User;
 
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepo {
     void addUser(User user);
 
     void deleteUser(Long id);
@@ -14,4 +14,7 @@ public interface UserRepository {
     User getUserById(Long id);
 
     List<User> getAllUsers();
+
+    User getUserByUsername(String username);
+
 }
