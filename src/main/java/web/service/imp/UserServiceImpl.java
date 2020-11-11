@@ -47,6 +47,9 @@ public class UserServiceImpl implements UserService {
         return userRepo.getAllUsers();
     }
 
+    // «Пользователь» – это просто Object. В большинстве случаев он может быть
+    //  приведен к классу UserDetails.
+    // Для создания UserDetails используется интерфейс UserDetailsService, с единственным методом:
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo.getUserByUsername(username);
