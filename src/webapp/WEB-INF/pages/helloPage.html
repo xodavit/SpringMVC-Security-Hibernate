@@ -7,24 +7,7 @@
 </head>
 <body>
 <div>
-    <form th:action="@{/login}">
-        <button type="submit">Войти</button>
-    </form>
-    <form th:action="@{/logout}">
-        <button type="submit">Выйти</button>
-    </form>
-    <form th:action="@{/admin/all}">
-        <button type="submit">Админка</button>
-    </form>
-    <form th:action="@{/user}">
-        <button type="submit">ЛК</button>
-    </form>
-    <form th:action="@{/user/lk}">
-        <button type="submit">ЛК2</button>
-    </form>
-    <form th:action="@{/vip}">
-        <button type="submit">Вип контент</button>
-    </form>
+    <th:block th:include="menuPage">Menu</th:block>
 </div>
 <div>
     <th:block th:each="msg : ${messages}">

@@ -7,12 +7,7 @@
 <body>
 <h2>Добавить пользователя</h2>
 <div>
-    <form th:action="@{/}">
-        <button type="submit">Главная</button>
-    </form>
-    <form th:action="@{/logout}">
-        <button type="submit">Выйти</button>
-    </form>
+    <th:block th:include="menuPage">Menu</th:block>
 </div>
 <div>
     <form th:action="@{add}"
@@ -69,7 +64,7 @@
     </form>
     <br/>
     <form th:action="@{/admin/all}">
-        <button type="submit" class="btn btn-outline-danger">Назад к списку пользователей</button>
+        <button type="submit">Назад к списку пользователей</button>
     </form>
 </div>
 </body>
