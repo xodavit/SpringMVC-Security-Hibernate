@@ -15,10 +15,32 @@ import web.config.handler.LoginSuccessHandler;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
+//    private final UserDetailsService userDetailsService; // сервис, с помощью которого тащим пользователя
+//    private final SuccessUserHandler successUserHandler; // класс, в котором описана логика перенаправления пользователей по ролям
+//
+//    public SecurityConfig(@Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService, SuccessUserHandler successUserHandler) {
+//        this.userDetailsService = userDetailsService;
+//        this.successUserHandler = successUserHandler;
+//    }
+//
+//    @Autowired
+//    public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); // конфигурация для прохождения аутентификации
+//    }
+//
+//    @Override
+//    protected void configure(HttpSecurity http) throws Exception {
+//        // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
+//        http.authorizeRequests()
+//                .antMatchers("/").permitAll() // доступность всем
+//                .antMatchers("/user").access("hasAnyRole('ROLE_USER')") // разрешаем входить на /user пользователям с ролью User
+//                .and().formLogin()  // Spring сам подставит свою логин форму
+//                .successHandler(successUserHandler); // подключаем наш SuccessHandler для перенеправления по ролям
+//    }
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
     }
 
     @Override
