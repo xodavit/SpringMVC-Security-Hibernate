@@ -5,25 +5,13 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import java.util.List;
 import web.repository.UserRepo;
 
 
 @Repository
 public class UserRepoImpl implements UserRepo {
-    //    private final Map<String, User> userMap = Collections.singletonMap("test",
-//            new User(1L, "test", "test", Collections.singleton(new Role(1L, "ROLE_USER")))); // name - уникальное значение, выступает в качестве ключа Map
-//
-//    @Override
-//    public User getUserByName(String name) {
-//        if (!userMap.containsKey(name)) {
-//            return null;
-//        }
-//
-//        return userMap.get(name);
-//    }
-//}
+
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -38,10 +26,7 @@ public class UserRepoImpl implements UserRepo {
 
     @Override
     public void deleteUser(Long id) {
-//        getEntityManager()
-//                .createQuery("delete from User where id=: id", User.class)
-//                .setParameter("id", id)
-//                .executeUpdate();
+
         try {
             User user = getEntityManager().find(User.class, id);
             if (user != null) {

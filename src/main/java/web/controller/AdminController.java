@@ -84,21 +84,10 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-
-
-
-
-//    //TODO переделать на post
-//    @GetMapping("admin/delete/")
-//    public String deleteUserById(@RequestParam("id") Long id) {
-//        userService.deleteUser(id);
-//        return "redirect:/admin";
-//    }
-
-    @RequestMapping("admin/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id) {
-        this.userService.deleteUser(id);
-
+    @GetMapping("admin/delete/{id}")
+    public String deleteUserById(@PathVariable("id") Long id) {
+        userService.deleteUser(id);
         return "redirect:/admin";
     }
+
 }

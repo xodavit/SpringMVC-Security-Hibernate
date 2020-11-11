@@ -34,4 +34,12 @@ public class UserController {
     //        model.addAttribute("user", userService.findByName(principal.getName()));
     //        return "hello";
     //    }
+
+
+    //@GetMapping(value = "/user")
+    //    public String getUserinfo(ModelMap model) {
+    //        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    //        model.addAttribute("user", user);
+    //        return "userinfo";
+    //    }
 }

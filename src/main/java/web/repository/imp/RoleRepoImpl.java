@@ -10,7 +10,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class RoleRepoImpl  implements RoleRepo {
+public class RoleRepoImpl implements RoleRepo {
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -20,16 +20,12 @@ public class RoleRepoImpl  implements RoleRepo {
 
     @Override
     public Role getRoleByName(String name) {
-//        return getEntityManager().find(Role.class,name);
         Role role = null;
         try {
-            Query query = entityManager.createQuery("SELECT r FROM Role r WHERE r.name=:name");
-            query.setParameter("name", name);
-            role = (Role) query.getSingleResult();
-            //        return getEntityManager()
-            //                .createQuery("select u from User u where u.username = :username", User.class)
-            //                .setParameter("username", username)
-            //                .getSingleResult();
+            role = getEntityManager()
+                    .createQuery("SELECT r FROM Role r WHERE r.name=:name", Role.class)
+                    .setParameter("name", name)
+                    .getSingleResult();
         } catch (Exception e) {
             System.out.println("Роли с таким именем не существует!");
         }
@@ -38,7 +34,7 @@ public class RoleRepoImpl  implements RoleRepo {
 
     @Override
     public Role getRoleById(long id) {
-        return getEntityManager().find(Role.class,id);
+        return getEntityManager().find(Role.class, id);
     }
 
     @Override
