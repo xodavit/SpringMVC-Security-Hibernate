@@ -37,7 +37,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication().withUser("ADMIN").password("1").roles("ADMIN");
         auth.inMemoryAuthentication().withUser("USER").password("1").roles("USER");
-        auth.inMemoryAuthentication().withUser("XODAVIT").password("1").roles("ADMIN");
         auth.inMemoryAuthentication().withUser("VIP").password("1").roles("VIP");
     }
 
@@ -76,9 +75,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 //страница аутентификации доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/user").access("hasAnyRole('USER')") // разрешаем входить на /user пользователям с ролью User
-                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
-                .antMatchers("/vip").access("hasAnyRole('VIP')")
+                .antMatchers("/user/**").access("hasAnyRole('USER')") // разрешаем входить на /user пользователям с ролью User
+                .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
+                .antMatchers("/vip/**").access("hasAnyRole('VIP')")
                 .anyRequest().authenticated();
 
     }
