@@ -45,14 +45,14 @@ public class AdminController {
 
     @PostMapping(value = "admin/add")
     public String postAddUser(@ModelAttribute("user") User user,
-                              @ModelAttribute("roleAdmin") String roleAdmin,
-                              @ModelAttribute("roleVIP") String roleVIP) {
+                              @RequestParam(required=false) String roleAdmin,
+                              @RequestParam(required=false) String roleVIP) {
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRoleByName("ROLE_USER"));
-        if (roleAdmin.contains("ROLE_ADMIN")) {
+        if (roleAdmin != null && roleAdmin.equals("ROLE_ADMIN")) {
             roles.add(roleService.getRoleByName("ROLE_ADMIN"));
         }
-        if (roleVIP.contains("ROLE_VIP")) {
+        if (roleVIP != null && roleVIP.equals("ROLE_VIP")) {
             roles.add(roleService.getRoleByName("ROLE_VIP"));
         }
         user.setRoles(roles);
@@ -79,15 +79,15 @@ public class AdminController {
     }
     @PostMapping(value = "admin/edit")
     public String postEditUser(@ModelAttribute("user") User user,
-                               @ModelAttribute("roleAdmin") String roleAdmin,
-                               @ModelAttribute("roleVIP") String roleVIP) {
+                               @RequestParam(required=false) String roleAdmin,
+                               @RequestParam(required=false) String roleVIP) {
 
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRoleByName("ROLE_USER"));
-        if (roleAdmin .contains("ROLE_ADMIN")) {
+        if (roleAdmin != null && roleAdmin .equals("ROLE_ADMIN")) {
             roles.add(roleService.getRoleByName("ROLE_ADMIN"));
         }
-        if (roleVIP .contains("ROLE_VIP")) {
+        if (roleVIP != null && roleVIP.equals("ROLE_VIP")) {
             roles.add(roleService.getRoleByName("ROLE_VIP"));
         }
         user.setRoles(roles);
