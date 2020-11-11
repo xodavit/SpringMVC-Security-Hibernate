@@ -28,23 +28,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); // конфигурация для прохождения аутентификации
 //    }
 //
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        // http.csrf().disable(); - попробуйте выяснить сами, что это даёт
-//        http.authorizeRequests()
-//                .antMatchers("/").permitAll() // доступность всем
-//                .antMatchers("/user").access("hasAnyRole('ROLE_USER')") // разрешаем входить на /user пользователям с ролью User
-//                .and().formLogin()  // Spring сам подставит свою логин форму
-//                .successHandler(successUserHandler); // подключаем наш SuccessHandler для перенеправления по ролям
-//    }
+
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("ADMIN").password("ADMIN").roles("ADMIN");
-        auth.inMemoryAuthentication().withUser("USER").password("USER").roles("USER");
+        auth.inMemoryAuthentication().withUser("ADMIN").password("1").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("USER").password("1").roles("USER");
+        auth.inMemoryAuthentication().withUser("XODAVIT").password("1").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("VIP").password("1").roles("VIP");
     }
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+
         http.formLogin()
                 // указываем страницу с формой логина
                 .loginPage("/login")
@@ -65,16 +61,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                 // указываем URL при удачном логауте
                 .logoutSuccessUrl("/login?logout")
-                //выклчаем кроссдоменную секьюрность (на этапе обучения неважна)
-                .and().csrf().disable();
+                //выключаем кросс-доменную секьюрность (на этапе обучения неважна)
+                .and().csrf().disable(); //- попробуйте выяснить сами, что это даёт
 
         http
                 // делаем страницу регистрации недоступной для авторизированных пользователей
                 .authorizeRequests()
-                //страницы аутентификаци доступна всем
+
+                .antMatchers("/").permitAll() // доступность всем
+
+                //страница аутентификации доступна всем
                 .antMatchers("/login").anonymous()
                 // защищенные URL
-                .antMatchers("/hello").access("hasAnyRole('ADMIN')").anyRequest().authenticated();
+                .antMatchers("/user").access("hasAnyRole('USER')") // разрешаем входить на /user пользователям с ролью User
+                .antMatchers("/admin").access("hasAnyRole('ADMIN')")
+                .antMatchers("/vip").access("hasAnyRole('VIP')")
+                .anyRequest().authenticated();
+
     }
 
     // Необходимо для шифрования паролей

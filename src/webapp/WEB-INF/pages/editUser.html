@@ -7,7 +7,10 @@
 <body>
 <div>
     <form th:action="@{/}">
-        <button type="submit" class="btn btn-outline-danger">На главную</button>
+        <button type="submit">Главная</button>
+    </form>
+    <form th:action="@{/logout}">
+        <button type="submit">Выйти</button>
     </form>
 </div>
 <h2>Изменить пользователя</h2>
@@ -40,9 +43,16 @@
                 <label>
                     <input type="checkbox"
                            name="roleAdmin"
-                           th:checked="${role}"
-                           th:value="'ROLE_ADMIN'"
-                           th:text="'Администратор'">
+                           th:checked="${roleAdmin}"
+                           th:value="ROLE_ADMIN"
+                           th:text="Администратор">
+                </label>
+                <label>
+                    <input type="checkbox"
+                           name="roleVIP"
+                           th:checked="${roleVIP}"
+                           th:value="ROLE_VIP"
+                           th:text="Вип">
                 </label>
             </p>
         </fieldset>

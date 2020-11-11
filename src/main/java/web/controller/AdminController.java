@@ -45,11 +45,15 @@ public class AdminController {
 
     @PostMapping(value = "admin/add")
     public String postAddUser(@ModelAttribute("user") User user,
-                              @ModelAttribute("roleAdmin") String roleAdmin) {
+                              @ModelAttribute("roleAdmin") String roleAdmin,
+                              @ModelAttribute("roleVIP") String roleVIP) {
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRoleByName("ROLE_USER"));
         if (roleAdmin.contains("ROLE_ADMIN")) {
             roles.add(roleService.getRoleByName("ROLE_ADMIN"));
+        }
+        if (roleVIP.contains("ROLE_VIP")) {
+            roles.add(roleService.getRoleByName("ROLE_VIP"));
         }
         user.setRoles(roles);
         userService.addUser(user);
@@ -64,7 +68,10 @@ public class AdminController {
         Set<Role> roles = user.getRoles();
         for (Role role: roles) {
             if (role.equals(roleService.getRoleByName("ROLE_ADMIN"))) {
-                model.addAttribute("role", true);
+                model.addAttribute("roleAdmin", true);
+            }
+            if (role.equals(roleService.getRoleByName("ROLE_VIP"))) {
+                model.addAttribute("roleVIP", true);
             }
         }
         model.addAttribute("user", user);
@@ -72,12 +79,16 @@ public class AdminController {
     }
     @PostMapping(value = "admin/edit")
     public String postEditUser(@ModelAttribute("user") User user,
-                               @ModelAttribute("roleAdmin") String roleAdmin) {
+                               @ModelAttribute("roleAdmin") String roleAdmin,
+                               @ModelAttribute("roleVIP") String roleVIP) {
 
         Set<Role> roles = new HashSet<>();
         roles.add(roleService.getRoleByName("ROLE_USER"));
         if (roleAdmin .contains("ROLE_ADMIN")) {
             roles.add(roleService.getRoleByName("ROLE_ADMIN"));
+        }
+        if (roleVIP .contains("ROLE_VIP")) {
+            roles.add(roleService.getRoleByName("ROLE_VIP"));
         }
         user.setRoles(roles);
         userService.editUser(user);
