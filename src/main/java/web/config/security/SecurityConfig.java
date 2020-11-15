@@ -34,7 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder()); // конфигурация для прохождения аутентификации
     }
-
+//    @Bean
+//    public DaoAuthenticationProvider daoAuthenticationProvider() {
+//        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+//        authenticationProvider.setPasswordEncoder(passwordEncoder());
+//        authenticationProvider.setUserDetailsService(userDetailsService);
+//        return authenticationProvider;
+//    }
 
 //    @Override
 //    public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,13 +48,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //        auth.inMemoryAuthentication().withUser("USER").password("1").roles("USER");
 //        auth.inMemoryAuthentication().withUser("VIP").password("1").roles("VIP");
 //    }
-    @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        return authenticationProvider;
-    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
@@ -92,10 +92,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //страница аутентификации доступна всем
                 .antMatchers("/login").anonymous()
+
                 // защищенные URL
-                .antMatchers("/user/**").access("hasAnyRole('USER')") // разрешаем входить на /user пользователям с ролью User
-                .antMatchers("/admin/**").access("hasAnyRole('ADMIN')")
-                .antMatchers("/vip/**").access("hasAnyRole('VIP')")
+
+                //.antMatchers("/user/**").access("hasAnyRole('USER')") // разрешаем входить на /user пользователям с ролью User
+                //.antMatchers("/admin/**").access("hasRole('ADMIN')")
+                //.antMatchers("/vip/**").access("hasRole('VIP')")
+                .antMatchers("/user/**").hasRole("USER")
+                .antMatchers("/admin/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/vip/**").hasRole("VIP")
                 .anyRequest().authenticated();
 
     }
