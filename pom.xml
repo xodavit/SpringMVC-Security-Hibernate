@@ -22,7 +22,7 @@
 
     <junit.version>4.13.1</junit.version>
     <spring.version>5.2.9.RELEASE</spring.version>
-    <spring.security.version>5.2.0.RELEASE</spring.security.version>
+    <spring.security.version>5.2.10.RELEASE</spring.security.version>
 
     <hibernate.version>5.4.22.Final</hibernate.version>
     <mysql.connector.java.version>8.0.21</mysql.connector.java.version>
