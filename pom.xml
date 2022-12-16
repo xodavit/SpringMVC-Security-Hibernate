@@ -21,7 +21,7 @@
     <!--    <maven.compiler.target>${java.version}</maven.compiler.target>-->
 
     <junit.version>4.13.1</junit.version>
-    <spring.version>5.2.9.RELEASE</spring.version>
+    <spring.version>5.2.20.RELEASE</spring.version>
     <spring.security.version>5.2.0.RELEASE</spring.security.version>
 
     <hibernate.version>5.4.22.Final</hibernate.version>
